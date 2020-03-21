@@ -1,8 +1,6 @@
-import React, {Component, Fragment} from 'react';
-import {Button} from "reactstrap";
+import React, {Component} from 'react';
 import {fetchProducts} from "../../store/actions/productsActions";
 import {connect} from "react-redux";
-import {Link} from "react-router-dom";
 import ProductListItem from "../../components/ProductListItem/ProductListItem";
 
 class Products extends Component {
@@ -29,8 +27,6 @@ class Products extends Component {
               />
           ))}
         </div>
-
-        <div ref={this.bottom}/>
       </>
     );
   }

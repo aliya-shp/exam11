@@ -6,14 +6,13 @@ import {NotificationContainer} from "react-notifications";
 import {logoutUser} from "./store/actions/usersActions";
 import {fetchCategories} from "./store/actions/categoriesActions";
 import {fetchProducts} from "./store/actions/productsActions";
-// import Toolbar from "./components/UI/Toolbar/Toolbar";
-// import Products from "./containers/Products/Products";
-// import NewProduct from "./containers/NewProduct/NewProduct";
-// import Register from "./containers/Register/Register";
-// import Login from "./containers/Login/Login";
-// import Sidebar from "./components/Sidebar/Sidebar";
-// import Product from "./containers/Product/Product";
-
+import Toolbar from "./components/UI/Toolbar/Toolbar";
+import Products from "./containers/Products/Products";
+import NewProduct from "./containers/NewProduct/NewProduct";
+import Register from "./containers/Register/Register";
+import Login from "./containers/Login/Login";
+import Sidebar from "./components/SideBar/SideBar";
+import ProductPage from "./containers/ProductPage/ProductPage";
 import './App.css'
 
 class App extends Component {
@@ -36,7 +35,7 @@ class App extends Component {
               <Switch>
                 <Route path="/" exact component={Products}/>
                 <Route path="/products/new" exact component={NewProduct}/>
-                <Route path="/product/:id" exact component={Product}/>
+                <Route path="/product/:id" exact component={ProductPage}/>
                 <Route path="/register" exact component={Register}/>
                 <Route path="/login" exact component={Login}/>
                 <NotificationContainer/>
