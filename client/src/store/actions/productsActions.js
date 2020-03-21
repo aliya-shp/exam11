@@ -40,9 +40,9 @@ export const createProduct = productData => {
     };
 };
 
-export const fetchProduct = id => {
+export const fetchProduct = productId => {
     return async dispatch => {
-        const response = await axiosApi.get('/products/' + id);
+        const response = await axiosApi.get('/products/' + productId);
         dispatch(fetchProductSuccess(response.data));
     }
 };
@@ -52,11 +52,11 @@ export const deleteProduct = productId => {
         try {
             const token = getState().auth.user.token;
             await axiosApi.delete('/products/' + productId, {headers: {Authorization: 'Token ' + token}});
-            dispatch(deleteProductSuccess())
+            dispatch(deleteProductSuccess());
             dispatch(push('/products'));
             NotificationManager.warning('Successfully deleted');
-        } catch (e) {
-            dispatch(deleteProductFailure());
+        } catch (error) {
+            dispatch(deleteProductFailure(error));
         }
     }
 };
