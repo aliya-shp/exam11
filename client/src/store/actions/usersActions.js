@@ -1,5 +1,6 @@
 import axiosApi from "../../axiosApi";
 import {push} from 'connected-react-router';
+import {NotificationManager} from 'react-notifications';
 
 export const REGISTER_USER_REQUEST = 'REGISTER_USER_REQUEST';
 export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';
@@ -27,12 +28,15 @@ export const registerUser = userData => {
             dispatch(registerUserRequest());
             await axiosApi.post('/users', userData);
             dispatch(registerUserSuccess());
+            NotificationManager.success('Successfully registered');
             dispatch(push('/'));
         } catch (error) {
             if (error.response) {
                 dispatch(registerUserFailure(error.response.data));
+                NotificationManager.error('The registration is unsuccessful');
             } else {
                 dispatch(registerUserFailure({global: 'Network error or no internet'}));
+                NotificationManager.error('Connection failed');
             }
         }
     }
@@ -44,9 +48,11 @@ export const loginUser = userData => {
             dispatch(loginUserRequest());
             const response = await axiosApi.post('/users/sessions', userData);
             dispatch(loginUserSuccess(response.data));
+            NotificationManager.success('Successfully logged in');
             dispatch(push('/'));
         } catch (error) {
             dispatch(loginUserFailure(error.response.data));
+            NotificationManager.error('The login process is failed');
         }
     }
 };
@@ -60,5 +66,7 @@ export const logoutUser = () => {
 
         dispatch(logoutUserSuccess());
         dispatch(push('/'));
+        NotificationManager.success('Successfully logged out');
+
     }
 };
